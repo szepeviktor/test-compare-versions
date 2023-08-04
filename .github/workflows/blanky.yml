@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch: null
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v3
+      -
+        name: "Compare two versions"
+        id: "comparision"
+        run: |
+          if dpkg --compare-versions "7.4.0" lt "8.0"; then
+            satisfied="true"
+          else
+            satisfied="false"
+          fi          
+          echo "satisfied='${satisfied}'" >>"${GITHUB_OUTPUT}"
+      -
+        name: "Use the result of the comparision"
+        if: "${{ steps.comparision.outputs.satisfied == 'true' }}"
+        run: "echo 'Do it!'"
+      -
+        name: "Use the result of the comparision"
+        if: "${{ steps.comparision.outputs.satisfied == 'false' }}"
+        run: "echo \"Don't it!\""
