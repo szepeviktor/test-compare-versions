@@ -22,6 +22,7 @@ jobs:
           else
             satisfied="false"
           fi          
+          echo "satisfied='${satisfied}'"
           echo "satisfied='${satisfied}'" >>"${GITHUB_OUTPUT}"
       -
         name: "Use the result of the comparision"
