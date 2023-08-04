@@ -8,7 +8,7 @@ on:
   workflow_dispatch: null
 
 jobs:
-  build:
+  compare:
     runs-on: ubuntu-latest
     steps:
       -
@@ -22,8 +22,7 @@ jobs:
           else
             satisfied="false"
           fi          
-          echo "satisfied='${satisfied}'"
-          echo "satisfied='${satisfied}'" >>"${GITHUB_OUTPUT}"
+          echo "satisfied=${satisfied}" >>"${GITHUB_OUTPUT}"
       -
         name: "Use the result of the comparision"
         if: "${{ steps.comparision.outputs.satisfied == 'true' }}"
