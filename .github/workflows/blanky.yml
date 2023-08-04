@@ -17,17 +17,17 @@ jobs:
         name: "Compare two versions"
         id: "comparision"
         run: |
-          if dpkg --compare-versions "7.4.0" lt "8.0"; then
+          if dpkg --compare-versions "17.4.0" lt "8.0"; then
             satisfied="true"
           else
             satisfied="false"
           fi          
           echo "satisfied=${satisfied}" >>"${GITHUB_OUTPUT}"
       -
-        name: "Use the result of the comparision"
+        name: "It is true"
         if: "${{ steps.comparision.outputs.satisfied == 'true' }}"
         run: "echo 'Do it!'"
       -
-        name: "Use the result of the comparision"
+        name: "It is false"
         if: "${{ steps.comparision.outputs.satisfied == 'false' }}"
         run: "echo \"Don't it!\""
