@@ -8,7 +8,7 @@ on:
   workflow_dispatch: null
 
 jobs:
-  compare:
+  version_compare:
     runs-on: "ubuntu-latest"
     timeout-minutes: 1
     steps:
@@ -29,15 +29,8 @@ jobs:
       -
         name: "It is true"
         if: "${{ steps.comparision.outputs.satisfied == 'true' }}"
-        run: "echo 'Do it!'"
+        run: "echo \"Do it!\""
       -
         name: "It is false"
         if: "${{ steps.comparision.outputs.satisfied == 'false' }}"
         run: "echo \"Don't it!\""
-      -
-        name: "View context"
-        uses: "actions/github-script@v6"
-        with:
-          script: |
-            const semver = __original_require__('semver');
-            console.log(semver.valid('1.2.3'));
