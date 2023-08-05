@@ -34,3 +34,10 @@ jobs:
         name: "It is false"
         if: "${{ steps.comparision.outputs.satisfied == 'false' }}"
         run: "echo \"Don't it!\""
+      -
+        name: "View context"
+        uses: "actions/github-script@v6"
+        with:
+          script: |
+            console.log(context);
+            console.log(semver);
