@@ -39,5 +39,6 @@ jobs:
         uses: "actions/github-script@v6"
         with:
           script: |
+            const semver = require('semver');
             console.log(context);
-            console.log(semver);
+            console.log(semver.valid('1.2.3'));
